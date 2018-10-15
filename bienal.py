@@ -12,6 +12,20 @@ def http_get(url):
     return response.read()
 
 
+def get_deep_ai_caption_position(img_width, img_height, caption):
+    """
+    Deep AI scales image limiting a max of 800 for height or width
+    Here we're reversing this scale so we can draw the boxes in the image
+    """
+    scale = 1 / (float(800) / max(img_width, img_height))
+    box = caption['bounding_box']
+    top = int(box[0] * scale)
+    left = int(box[1] * scale)
+    right = int(left + box[3] * scale)
+    bottom = int(top + box[2] * scale)
+    return (top, left), (bottom, right)
+
+
 AWS = namedtuple('AWS', ['faces', 'celebs', 'labels'])
 IBM = namedtuple('IBM', ['faces', 'main'])
 GOOGLE = namedtuple('Google', [
