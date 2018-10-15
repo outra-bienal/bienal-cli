@@ -55,51 +55,58 @@ class ImageAnalysis():
     @property
     def aws(self):
         data = self.data['amazonRekog']
-        return AWS(data['faces'], data['celebs'], data['labels'])
+        return AWS(
+            data.get('faces', {}),
+            data.get('celebs', {}),
+            data.get('labels', {}),
+        )
 
     @property
     def ibm(self):
         data = self.data['ibmwatson']
-        return IBM(data['faces'], data['main'])
+        return IBM(
+            data.get('faces', {}),
+            data.get('main', {})
+        )
 
     @property
     def google(self):
         data = self.data['googlecloud']
         return GOOGLE(
-            data['webDetection'],
-            data['textAnnotations'],
-            data['fullTextAnnotation'],
-            data['labelAnnotations'],
-            data['cropHintsAnnotation'],
-            data['safeSearchAnnotation'],
-            data['imagePropertiesAnnotation'],
+            data.get('webDetection', {}),
+            data.get('textAnnotations', {}),
+            data.get('fullTextAnnotation', {}),
+            data.get('labelAnnotations', {}),
+            data.get('cropHintsAnnotation', {}),
+            data.get('safeSearchAnnotation', {}),
+            data.get('imagePropertiesAnnotation', {}),
         )
 
     @property
     def azure(self):
         data = self.data['microsoftazure']['main']
         return AZURE(
-            data['faces'],
-            data['tags'],
-            data['adult'],
-            data['color'],
-            data['categories'],
-            data['description'],
+            data.get('faces', {}),
+            data.get('tags', {}),
+            data.get('adult', {}),
+            data.get('color', {}),
+            data.get('categories', {}),
+            data.get('description', {}),
         )
 
     @property
     def deep_ai(self):
-        return DEEP_AI(self.data['deepAi']['DenseCap'])
+        return DEEP_AI(self.data['deepAi'].get('DenseCap', {}))
 
     @property
     def clarifai(self):
         data = self.data['clarifai']
         return CLARIFAI(
-            data['nsfw'],
-            data['general'],
-            data['moderation'],
-            data['celebrities'],
-            data['demographics'],
+            data.get('nsfw', {}),
+            data.get('general', {}),
+            data.get('moderation', {}),
+            data.get('celebrities', {}),
+            data.get('demographics', {}),
         )
 
     def __repr__(self):
