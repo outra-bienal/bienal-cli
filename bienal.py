@@ -165,4 +165,4 @@ class BienalClient():
         return Collection(self.api.get_collection(col_id))
 
     def get_collection_image(self, col_id, image_id):
-        return ImageAnalysis(self.api.get_collection_image(col_id))
+        return ImageAnalysis(self.api.get_collection_image(col_id, image_id))
